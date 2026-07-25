@@ -3,6 +3,7 @@ import SwiftUI
 /// The Anleitung. Reachable from the `?` in the panel and in the window — the
 /// syntax is guessable but not discoverable, so it needs a home.
 struct GuideView: View {
+    @ObservedObject private var hotKeys = HotKeyManager.shared
     @Environment(\.colorScheme) private var scheme
 
     var body: some View {
@@ -44,7 +45,7 @@ struct GuideView: View {
             Text("Ein Feld für alles")
                 .font(.system(size: 26, weight: .bold, design: .rounded))
                 .foregroundStyle(Theme.ink)
-            Text("Icon anklicken oder ⌥⌘R drücken — der Cursor steht schon im Feld. "
+            Text("Icon anklicken\(hotKeys.shortcut.map { " oder \($0.display) drücken" } ?? "") — der Cursor steht schon im Feld. "
                + "Tippen, Return, fertig. Danach ist der Text komplett markiert: "
                + "nochmal Return würfelt neu, Tippen überschreibt.\n\n"
                + "Was gewürfelt wird, leitet Quick RNG aus deiner Eingabe ab. "
@@ -72,12 +73,19 @@ struct GuideView: View {
         ("münze", "Kopf oder Zahl — coin, flip, toss"),
     ]
 
-    private let keys: [(String, String)] = [
-        ("Return", "würfeln — und gleich nochmal für einen neuen Wurf"),
-        ("↑ / ↓", "durch frühere Eingaben blättern"),
-        ("esc", "Panel schließen — und dieses Fenster hier"),
-        ("⌥⌘R", "Panel von überall öffnen (unten einstellbar)"),
-    ]
+    /// The last row follows the recorder below — a list that still claims ⌥⌘R
+    /// after you've changed it is worse than no list.
+    private var keys: [(String, String)] {
+        [
+            ("Return", "würfeln — und gleich nochmal für einen neuen Wurf"),
+            ("↑ / ↓", "durch frühere Eingaben blättern"),
+            ("esc", "Panel schließen — und dieses Fenster hier"),
+            (hotKeys.shortcut?.display ?? "—",
+             hotKeys.shortcut == nil
+                ? "kein Kurzbefehl gesetzt — unten einstellbar"
+                : "Panel von überall öffnen (unten einstellbar)"),
+        ]
+    }
 
     private func section(_ title: String, entries: [(String, String)]) -> some View {
         VStack(alignment: .leading, spacing: 12) {
