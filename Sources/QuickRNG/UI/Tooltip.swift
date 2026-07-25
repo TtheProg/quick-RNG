@@ -31,7 +31,7 @@ private struct TooltipModifier: ViewModifier {
                                 )
                                 .shadow(color: .black.opacity(0.22), radius: 6, y: 2)
                         )
-                        .offset(y: -26)
+                        .offset(y: -30)
                         .transition(.opacity)
                         .allowsHitTesting(false)
                 }
@@ -45,10 +45,14 @@ extension View {
 }
 
 /// An icon button that brightens on hover and explains itself.
+///
+/// The glyph is small by design, the target is not: `IconHitArea` gives every
+/// one of these a 28pt square to be clicked in, which is roughly where a
+/// pointer stops being fiddly.
 struct IconButton: View {
     let symbol: String
     let tooltip: String
-    var size: CGFloat = 13
+    var size: CGFloat = 15
     let action: () -> Void
 
     @State private var hovering = false
@@ -57,11 +61,24 @@ struct IconButton: View {
         Button(action: action) {
             Image(systemName: symbol)
                 .font(.system(size: size, weight: .semibold))
+                .iconHitArea(hovering: hovering)
         }
         .buttonStyle(.plain)
         .foregroundStyle(hovering ? Theme.inkStrong : Theme.inkFaint)
         .onHover { hovering = $0 }
         .animation(.easeOut(duration: 0.12), value: hovering)
         .tooltip(tooltip)
+    }
+}
+
+extension View {
+    /// A generous, hoverable click target around a small glyph.
+    func iconHitArea(hovering: Bool) -> some View {
+        frame(width: 28, height: 28)
+            .background(
+                RoundedRectangle(cornerRadius: 7, style: .continuous)
+                    .fill(hovering ? Theme.fill : Color.clear)
+            )
+            .contentShape(RoundedRectangle(cornerRadius: 7, style: .continuous))
     }
 }

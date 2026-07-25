@@ -5,6 +5,7 @@ struct PanelView: View {
     @ObservedObject var state = AppState.shared
     @ObservedObject private var hotKeys = HotKeyManager.shared
     @Environment(\.colorScheme) private var scheme
+    @State private var menuHovering = false
     var onHeightChange: (CGFloat) -> Void = { _ in }
 
     private var kind: RollKind? { state.result?.kind ?? state.preview?.kind }
@@ -90,10 +91,12 @@ struct PanelView: View {
                 GuideWindowController.shared.show()
                 PanelController.shared.hide()
             }
+            .padding(.trailing, -8)   // the hit areas already carry the spacing
             IconButton(symbol: "macwindow", tooltip: "Als Fenster öffnen") {
                 WindowController.shared.show()
                 PanelController.shared.hide()
             }
+            .padding(.trailing, -8)
 
             Menu {
                 Button("Als Fenster öffnen") { WindowController.shared.show(); PanelController.shared.hide() }
@@ -107,12 +110,15 @@ struct PanelView: View {
                 Button("Quick RNG beenden") { NSApp.terminate(nil) }
             } label: {
                 Image(systemName: "ellipsis")
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.system(size: 15, weight: .semibold))
+                    .iconHitArea(hovering: menuHovering)
             }
             .menuStyle(.borderlessButton)
             .menuIndicator(.hidden)
-            .frame(width: 18)
-            .foregroundStyle(Theme.inkFaint)
+            .frame(width: 28, height: 28)
+            .foregroundStyle(menuHovering ? Theme.inkStrong : Theme.inkFaint)
+            .onHover { menuHovering = $0 }
+            .animation(.easeOut(duration: 0.12), value: menuHovering)
             .tooltip("Mehr")
         }
         .zIndex(1)   // tooltips must draw over the input row above them

@@ -19,9 +19,10 @@ struct WindowView: View {
                         .foregroundStyle(Theme.inkFaint)
                     Spacer()
                     KindChip(request: state.preview)
-                    IconButton(symbol: "questionmark.circle", tooltip: "Anleitung", size: 14) {
+                    IconButton(symbol: "questionmark.circle", tooltip: "Anleitung", size: 16) {
                         GuideWindowController.shared.show()
                     }
+                    .padding(.trailing, -7)
                 }
                 .padding(.top, 24)
 
