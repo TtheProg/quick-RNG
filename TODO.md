@@ -2,7 +2,18 @@
 
 ## Als Nächstes
 
-- [ ] **Ergebnis kopieren** — `⌘C` legt das Ergebnis in die Zwischenablage,
+- [ ] **Mehrsprachigkeit — Deutsch, Englisch, Arabisch.** Die Sprache folgt
+      automatisch der Systemsprache, wenn sie vorhanden ist, sonst Englisch;
+      zusätzlich in den Einstellungen (Anleitung → Einstellungen) fest
+      wählbar. Betrifft alle UI-Strings, `ANLEITUNG.md`, `GuideView`,
+      `WindowView.syntax` und die Ergebnistexte („Kopf"/„Zahl", „aus 365
+      Tagen", „aus 4 Optionen").
+      Für Arabisch kommt RTL dazu: Layout spiegeln, aber die Eingabe- und
+      Ergebniszeile bleibt LTR, weil dort Zahlen und Syntax stehen.
+      Der Parser versteht deutsche *und* englische Schlüsselwörter bereits
+      (`bis`/`to`, `mische`/`shuffle`, `münze`/`coin`, `w`/`d`) — arabische
+      müssten ergänzt werden, und zwar sprachunabhängig: eine arabische
+      Oberfläche darf `2d6` nicht ablehnen. — `⌘C` legt das Ergebnis in die Zwischenablage,
       ohne dass man es markieren muss. Für ein Tool, mit dem man eine Zahl
       *holt*, ist das der offensichtlichste fehlende Schritt.
 - [ ] **Gewichtete Listen** — `rot*3, grün, blau` zieht rot dreimal so oft.
@@ -17,7 +28,6 @@
 - [ ] Uhrzeiten (`09:00 - 17:00`)
 - [ ] Buchstaben-/Zeichenketten (`8 Zeichen`, Passwort-artig)
 - [ ] Prozent-Chance (`30%` → ja/nein)
-- [ ] Englische UI-Strings + Sprachumschaltung (Parser versteht beides schon)
 
 ## Feinschliff
 
