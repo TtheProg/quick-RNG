@@ -108,6 +108,9 @@ Sources/QuickRNG/
 
 ## Conventions
 
+- **Commit in small steps.** One change per commit — a fix, a feature, a doc
+  update. Don't batch several unrelated things into one commit even when they
+  were done in one sitting; the history should be reviewable piece by piece.
 - UI strings are German, lowercase-ish and terse. Code and comments are English.
 - Comments explain *why*, not *what*. Match the existing density — sparse.
 - When adding an input form: extend `Parser.parse`, add the `Request` case and
