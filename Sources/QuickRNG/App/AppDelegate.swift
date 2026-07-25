@@ -6,6 +6,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var outsideClickMonitor: Any?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        NSApp.mainMenu = MainMenu.build(target: self)
+
         let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         if let button = item.button {
             button.image = Theme.statusIcon()
@@ -16,7 +18,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
         statusItem = item
 
-        // ⌥⌘R by default; changeable in the Anleitung. Pressing it again closes
+        // ⌥⌘R by default; changeable in the settings. Pressing it again closes
         // the panel, so the same keystroke gets you in and out.
         MainActor.assumeIsolated {
             HotKeyManager.shared.start { [weak self] in
@@ -76,10 +78,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             .target = self
         menu.addItem(withTitle: "Anleitung", action: #selector(openGuide), keyEquivalent: "?")
             .target = self
-        let login = menu.addItem(withTitle: "Bei Anmeldung starten",
-                                 action: #selector(toggleLoginItem), keyEquivalent: "")
-        login.target = self
-        login.state = LoginItem.isEnabled ? .on : .off
+        menu.addItem(withTitle: "Einstellungen …", action: #selector(openSettings), keyEquivalent: ",")
+            .target = self
         menu.addItem(.separator())
         let shortcut = HotKeyManager.shared.shortcut
         let hint = shortcut.map { "Überall öffnen mit \($0.display)" } ?? "Kein Kurzbefehl gesetzt"
@@ -92,13 +92,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @MainActor
-    @objc private func openGuide() {
+    @objc func openGuide() {
         GuideWindowController.shared.show()
     }
 
     @MainActor
-    @objc private func toggleLoginItem() {
-        LoginItem.toggle()
+    @objc func openSettings() {
+        SettingsWindowController.shared.show()
     }
 
     @MainActor

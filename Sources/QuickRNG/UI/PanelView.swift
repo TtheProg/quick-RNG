@@ -92,6 +92,11 @@ struct PanelView: View {
                 PanelController.shared.hide()
             }
             .padding(.trailing, -8)   // the hit areas already carry the spacing
+            IconButton(symbol: "gearshape", tooltip: "Einstellungen") {
+                SettingsWindowController.shared.show()
+                PanelController.shared.hide()
+            }
+            .padding(.trailing, -8)
             IconButton(symbol: "macwindow", tooltip: "Als Fenster öffnen") {
                 WindowController.shared.show()
                 PanelController.shared.hide()
@@ -101,10 +106,7 @@ struct PanelView: View {
             Menu {
                 Button("Als Fenster öffnen") { WindowController.shared.show(); PanelController.shared.hide() }
                 Button("Anleitung") { GuideWindowController.shared.show(); PanelController.shared.hide() }
-                Toggle("Bei Anmeldung starten", isOn: Binding(
-                    get: { LoginItem.isEnabled },
-                    set: { _ in LoginItem.toggle() }
-                ))
+                Button("Einstellungen …") { SettingsWindowController.shared.show(); PanelController.shared.hide() }
                 Divider()
                 Text(shortcutHint)
                 Button("Quick RNG beenden") { NSApp.terminate(nil) }
