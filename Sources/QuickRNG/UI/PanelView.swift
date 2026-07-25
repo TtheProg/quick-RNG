@@ -3,6 +3,7 @@ import SwiftUI
 /// The thing that drops out of the menu bar.
 struct PanelView: View {
     @ObservedObject var state = AppState.shared
+    @ObservedObject private var hotKeys = HotKeyManager.shared
     @Environment(\.colorScheme) private var scheme
     var onHeightChange: (CGFloat) -> Void = { _ in }
 
@@ -85,27 +86,14 @@ struct PanelView: View {
             hint("return", "würfeln")
             hint("↑↓", "verlauf")
             Spacer(minLength: 4)
-            Button {
+            IconButton(symbol: "questionmark.circle", tooltip: "Anleitung") {
                 GuideWindowController.shared.show()
                 PanelController.shared.hide()
-            } label: {
-                Image(systemName: "questionmark.circle")
-                    .font(.system(size: 13, weight: .semibold))
             }
-            .buttonStyle(.plain)
-            .foregroundStyle(Theme.inkFaint)
-            .help("Anleitung")
-
-            Button {
+            IconButton(symbol: "macwindow", tooltip: "Als Fenster öffnen") {
                 WindowController.shared.show()
                 PanelController.shared.hide()
-            } label: {
-                Image(systemName: "macwindow")
-                    .font(.system(size: 13, weight: .semibold))
             }
-            .buttonStyle(.plain)
-            .foregroundStyle(Theme.inkFaint)
-            .help("Als Fenster öffnen")
 
             Menu {
                 Button("Als Fenster öffnen") { WindowController.shared.show(); PanelController.shared.hide() }
@@ -115,7 +103,7 @@ struct PanelView: View {
                     set: { _ in LoginItem.toggle() }
                 ))
                 Divider()
-                Text("Überall: ⌥⌘R")
+                Text(shortcutHint)
                 Button("Quick RNG beenden") { NSApp.terminate(nil) }
             } label: {
                 Image(systemName: "ellipsis")
@@ -125,7 +113,13 @@ struct PanelView: View {
             .menuIndicator(.hidden)
             .frame(width: 18)
             .foregroundStyle(Theme.inkFaint)
+            .tooltip("Mehr")
         }
+        .zIndex(1)   // tooltips must draw over the input row above them
+    }
+
+    private var shortcutHint: String {
+        hotKeys.shortcut.map { "Überall: \($0.display)" } ?? "Kein Kurzbefehl"
     }
 
     private func hint(_ key: String, _ label: String) -> some View {

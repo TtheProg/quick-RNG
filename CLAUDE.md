@@ -57,19 +57,22 @@ Sources/QuickRNG/
     Request.swift     the parsed intent + its chip label
     Fmt.swift         locale-aware number/date formatting
     AppState.swift    input, result, history, focus/select-all tokens
+    Shortcut.swift    the recorded global shortcut + its persistence
   UI/
     Theme.swift       dynamic colours, ink levels, the drawn status icon
     PanelView.swift   the menu bar panel
     WindowView.swift  the standalone window (roller + history)
-    GuideView.swift   the Anleitung
+    GuideView.swift   the Anleitung, incl. the shortcut setting
     ResultView.swift  the headline + the scramble animation + KindChip
     RollField.swift   NSTextField wrapper
+    Tooltip.swift     hover tooltips + IconButton
+    ShortcutRecorder.swift
   App/
     AppDelegate.swift        status item, hotkey, outside-click monitor
     PanelController.swift    the non-activating NSPanel
     WindowController.swift   main window + activation policy
     GuideWindowController.swift
-    HotKey.swift             Carbon ⌥⌘R
+    HotKey.swift             Carbon hot key + HotKeyManager
     LoginItem.swift          SMAppService
 ```
 
@@ -89,6 +92,14 @@ Sources/QuickRNG/
   / `inkFaint`, and `Theme.fill` / `hairline` for surfaces.
 - **The panel closes on `windowDidResignKey`**, with a 0.4s grace period after
   showing, plus a global mouse-down monitor. Removing either breaks dismissal.
+- **The panel resizes to its content, so anything that changes the result's
+  measured height makes the whole window shiver.** `ResultView` sizes its font
+  from the *settled* value, never from a scramble frame, and
+  `PanelController.resize` quantises to 4pt with a 4pt deadband. Both are load-
+  bearing; a roll out of 24000 tumbles through 3- and 5-digit numbers.
+- **Tooltips are hand-rolled** (`UI/Tooltip.swift`). `.help()` stays silent on
+  the panel's buttons — a non-activating panel of a background app never gets
+  AppKit's tooltip tracking. Use `IconButton` / `.tooltip(_:)`, not `.help()`.
 - **The status icon is drawn in `Theme.statusIcon()`.** `die.face.5` as an SF
   Symbol renders hairline-thin and undersized next to system icons.
 - **Parser order matters.** Coin words → shuffle prefix → pick-n prefix → dice →

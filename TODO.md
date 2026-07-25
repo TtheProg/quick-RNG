@@ -21,8 +21,6 @@
 
 ## Feinschliff
 
-- [ ] Kurzbefehl konfigurierbar machen (aktuell fest ⌥⌘R) und melden, wenn er
-      belegt ist — momentan schlägt die Registrierung still fehl.
 - [ ] Verlauf über Neustarts hinweg sichern (nur die Eingaben werden bisher
       gemerkt, nicht die Ergebnisse).
 - [ ] Panel-Breite an lange Ergebnisse anpassen (lange Listen schrumpfen die

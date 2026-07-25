@@ -86,6 +86,9 @@ enum Theme {
                                                   dark: NSColor.white.withAlphaComponent(0.13)))
     static let emptyResult = Color(nsColor: .dynamic(light: NSColor.black.withAlphaComponent(0.14),
                                                      dark: NSColor.white.withAlphaComponent(0.20)))
+    /// Opaque on purpose — a tooltip has to be readable over whatever it covers.
+    static let tooltipBackground = Color(nsColor: .dynamic(light: NSColor(hex: 0xFFFFFF),
+                                                           dark: NSColor(hex: 0x24272E)))
 
     /// Big results deserve big type; long ones have to give way.
     static func resultSize(for text: String, base: CGFloat) -> CGFloat {

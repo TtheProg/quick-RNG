@@ -1,6 +1,12 @@
 import AppKit
 import SwiftUI
 
+/// Esc closes the guide. It reaches here only when nothing in the window claimed
+/// it first — the shortcut recorder does, to cancel recording.
+final class EscapeClosingWindow: NSWindow {
+    override func cancelOperation(_ sender: Any?) { performClose(sender) }
+}
+
 /// The Anleitung gets its own window so it can be opened from the menu bar panel
 /// without the panel having to survive the click.
 @MainActor
@@ -17,7 +23,7 @@ final class GuideWindowController: NSObject, NSWindowDelegate {
     }
 
     private func makeWindow() -> NSWindow {
-        let window = NSWindow(
+        let window = EscapeClosingWindow(
             contentRect: NSRect(x: 0, y: 0, width: 560, height: 680),
             styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
             backing: .buffered,

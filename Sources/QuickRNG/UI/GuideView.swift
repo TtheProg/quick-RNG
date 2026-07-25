@@ -11,6 +11,13 @@ struct GuideView: View {
                 intro
                 section("Eingaben", entries: inputs)
                 section("Tasten", entries: keys)
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("EINSTELLUNGEN")
+                        .font(.system(size: 10.5, weight: .heavy, design: .rounded))
+                        .tracking(1.6)
+                        .foregroundStyle(Theme.inkFaint)
+                    ShortcutRecorder()
+                }
                 extras
             }
             .padding(.horizontal, 28)
@@ -68,8 +75,8 @@ struct GuideView: View {
     private let keys: [(String, String)] = [
         ("Return", "würfeln — und gleich nochmal für einen neuen Wurf"),
         ("↑ / ↓", "durch frühere Eingaben blättern"),
-        ("esc", "Panel schließen"),
-        ("⌥⌘R", "Panel von überall öffnen"),
+        ("esc", "Panel schließen — und dieses Fenster hier"),
+        ("⌥⌘R", "Panel von überall öffnen (unten einstellbar)"),
     ]
 
     private func section(_ title: String, entries: [(String, String)]) -> some View {

@@ -73,8 +73,19 @@ Beide Grenzen sind eingeschlossen. Die Reihenfolge ist egal.
 |---|---|
 | `Return` | würfeln — und gleich nochmal für einen neuen Wurf |
 | `↑` / `↓` | durch frühere Eingaben blättern |
-| `esc` | Panel schließen (im Fenster: Feld leeren) |
+| `esc` | Panel schließen · Anleitung schließen · im Fenster: Feld leeren |
 | `⌥⌘R` | Panel von überall öffnen |
+
+### Kurzbefehl ändern
+
+In der Anleitung **in der App** (`?` im Panel) steht unter *Einstellungen* das
+Feld **Kurzbefehl**. Draufklicken, die gewünschte Kombination drücken, fertig.
+`esc` bricht ab, `⌫` entfernt den Kurzbefehl ganz — das Menüleisten-Icon
+funktioniert dann weiterhin.
+
+Mindestens ein Modifikator (`⌘` `⌥` `⌃`) muss dabei sein, sonst würde die
+Kombination systemweit normales Tippen abfangen. Hat schon eine andere App die
+Kombination, steht das direkt unter dem Feld.
 
 ## Menüleiste und Fenster
 
@@ -110,9 +121,9 @@ alias rng='"/Applications/Quick RNG.app/Contents/MacOS/QuickRNG" --roll'
 fehlt ein Trennzeichen (`rot grün blau` statt `rot, grün, blau`) oder eine
 Bereichsgrenze (`3-` statt `3-9`).
 
-**⌥⌘R tut nichts** — der Kurzbefehl ist schon von einer anderen App belegt.
-Quick RNG registriert ihn beim Start und meldet sich dann nicht; das Icon
-funktioniert weiterhin.
+**⌥⌘R tut nichts** — dann hat eine andere App die Kombination. Unter
+*Einstellungen → Kurzbefehl* in der App steht das dann auch da; einfach eine
+andere Kombination aufnehmen.
 
 **Beim ersten Start: „nicht verifizierter Entwickler"** — die App ist ad-hoc
 signiert. Rechtsklick auf die App → *Öffnen* → *Öffnen*.

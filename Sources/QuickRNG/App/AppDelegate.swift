@@ -1,10 +1,8 @@
 import AppKit
 import SwiftUI
-import Carbon.HIToolbox
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem?
-    private var hotKey: HotKey?
     private var outsideClickMonitor: Any?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
@@ -18,10 +16,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
         statusItem = item
 
-        // ⌥⌘R from anywhere.
-        hotKey = HotKey(keyCode: UInt32(kVK_ANSI_R),
-                        modifiers: UInt32(optionKey | cmdKey)) { [weak self] in
-            MainActor.assumeIsolated { self?.openPanel() }
+        // ⌥⌘R by default; changeable in the Anleitung.
+        MainActor.assumeIsolated {
+            HotKeyManager.shared.start { [weak self] in
+                MainActor.assumeIsolated { self?.openPanel() }
+            }
         }
 
         // Clicks in other apps dismiss the panel (resignKey doesn't always fire
@@ -79,7 +78,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         login.target = self
         login.state = LoginItem.isEnabled ? .on : .off
         menu.addItem(.separator())
-        menu.addItem(withTitle: "Überall öffnen mit ⌥⌘R", action: nil, keyEquivalent: "").isEnabled = false
+        let shortcut = HotKeyManager.shared.shortcut
+        let hint = shortcut.map { "Überall öffnen mit \($0.display)" } ?? "Kein Kurzbefehl gesetzt"
+        menu.addItem(withTitle: hint, action: nil, keyEquivalent: "").isEnabled = false
         menu.addItem(.separator())
         menu.addItem(withTitle: "Quick RNG beenden", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
         statusItem?.menu = menu

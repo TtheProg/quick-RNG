@@ -33,8 +33,8 @@ Datumsformate: `TT.MM.JJJJ`, `TT.MM.JJ`, `JJJJ-MM-TT`, `TT/MM/JJJJ`.
 |---|---|
 | `Return` | würfeln (und danach nochmal für neu) |
 | `↑` / `↓` | durch frühere Eingaben blättern |
-| `esc` | Panel schließen |
-| `⌥⌘R` | Panel von überall öffnen |
+| `esc` | Panel bzw. Anleitung schließen |
+| `⌥⌘R` | Panel von überall öffnen — in der Anleitung änderbar |
 
 Rechtsklick aufs Menüleisten-Icon (oder das `···` im Panel): als Fenster öffnen,
 Anleitung, bei Anmeldung starten, beenden.

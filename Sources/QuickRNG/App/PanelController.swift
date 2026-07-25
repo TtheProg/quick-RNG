@@ -78,10 +78,14 @@ final class PanelController: NSObject, NSWindowDelegate {
     }
 
     /// The panel grows downward from the menu bar, so keep the top edge pinned.
+    ///
+    /// Quantised and deadbanded on purpose: SwiftUI reports fractionally
+    /// different heights mid-animation, and resizing the window on every one of
+    /// those made the whole panel shiver while a result was rolling in.
     private func resize(to height: CGFloat) {
         guard let panel, height > 1 else { return }
-        let h = height.rounded(.up)
-        guard abs(panel.frame.height - h) > 0.5 else { return }
+        let h = (height / 4).rounded(.up) * 4
+        guard abs(panel.frame.height - h) >= 4 else { return }
         var frame = panel.frame
         frame.origin.y += frame.height - h
         frame.size.height = h

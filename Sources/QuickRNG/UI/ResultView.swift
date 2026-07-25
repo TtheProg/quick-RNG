@@ -14,10 +14,13 @@ struct ResultView: View {
 
     var body: some View {
         let text = scrambled ?? result?.primary ?? "—"
+        // Size from the *settled* value, never from the scramble frames: a roll
+        // out of 24000 tumbles through 3- and 5-digit numbers, and sizing on
+        // those would resize the type — and with it the whole panel — mid-roll.
+        let size = Theme.resultSize(for: result?.primary ?? "—", base: baseSize)
         VStack(alignment: .leading, spacing: 8) {
             Text(text)
-                .font(.system(size: Theme.resultSize(for: text, base: baseSize),
-                              weight: .bold, design: .rounded))
+                .font(.system(size: size, weight: .bold, design: .rounded))
                 .monospacedDigit()
                 .foregroundStyle(result == nil ? Theme.emptyResult : accent)
                 .shadow(color: accent.opacity(result == nil ? 0 : (scheme == .dark ? 0.45 : 0.18)),
@@ -25,6 +28,7 @@ struct ResultView: View {
                 .lineLimit(6)
                 .minimumScaleFactor(0.4)
                 .fixedSize(horizontal: false, vertical: true)
+                .frame(minHeight: size * 1.2, alignment: .topLeading)
                 .contentTransition(.numericText())
                 .scaleEffect(settled ? 1 : 1.05, anchor: .leading)
                 .animation(.spring(response: 0.28, dampingFraction: 0.6), value: settled)
