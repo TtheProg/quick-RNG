@@ -2,7 +2,7 @@
 
 Ein minimaler Zufallsgenerator für macOS, der in der Menüleiste wohnt.
 
-Icon anklicken (oder **⌥⌘R**) → der Cursor steht schon im Eingabefeld → tippen →
+Icon anklicken (oder **⇧⌘R**) → der Cursor steht schon im Eingabefeld → tippen →
 **Return** → Ergebnis. Der Text ist danach komplett markiert: nochmal Return
 würfelt neu, Tippen überschreibt.
 
@@ -34,13 +34,20 @@ Datumsformate: `TT.MM.JJJJ`, `TT.MM.JJ`, `JJJJ-MM-TT`, `TT/MM/JJJJ`.
 | `Return` | würfeln (und danach nochmal für neu) |
 | `↑` / `↓` | durch frühere Eingaben blättern |
 | `esc` | Panel bzw. Anleitung schließen |
-| `⌥⌘R` | Panel öffnen und wieder schließen — in der Anleitung änderbar |
+| `⌘,` | Einstellungen |
+| `⇧⌘R` | Panel öffnen und wieder schließen — in den Einstellungen änderbar |
 
 Rechtsklick aufs Menüleisten-Icon (oder das `···` im Panel): als Fenster öffnen,
-Anleitung, bei Anmeldung starten, beenden.
+Anleitung, Einstellungen, beenden.
 
 Die ausführliche **[Anleitung](ANLEITUNG.md)** steckt auch in der App — `?` im
-Panel und im Fenster.
+Panel und im Fenster. Die **Einstellungen** (Zahnrad im Panel, `⌘,`) halten den
+Kurzbefehl und „bei Anmeldung starten".
+
+⇧⌘R ist bequem, aber belegt: Finder *AirDrop*, Safari *Reader*, Mail *Allen
+antworten*, Browser *Hard Reload*. Ein globaler Kurzbefehl gewinnt gegen die
+App im Vordergrund — wenn das stört, in den Einstellungen ändern (⌃⌥R war in
+einer Messung frei).
 
 Das **Fenster** ist dasselbe Tool mit mehr Platz — plus Verlauf (Eintrag
 anklicken übernimmt die Eingabe wieder) und einem Spickzettel. Solange es offen

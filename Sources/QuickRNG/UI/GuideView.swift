@@ -150,7 +150,7 @@ struct GuideView: View {
     ]
 
     /// The shortcut row follows the actual setting — a list that still claims
-    /// ⌥⌘R after you've changed it is worse than no list.
+    /// ⇧⌘R after you've changed it is worse than no list.
     private var keys: [(String, String)] {
         [
             ("Return", "würfeln — und gleich nochmal für einen neuen Wurf"),

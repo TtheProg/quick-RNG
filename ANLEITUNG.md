@@ -5,7 +5,7 @@ Rechtsklick aufs Menüleisten-Icon → **Anleitung**.
 
 ## Schnellstart
 
-1. Auf das Würfel-Icon oben in der Menüleiste klicken — oder **⌥⌘R** drücken.
+1. Auf das Würfel-Icon oben in der Menüleiste klicken — oder **⇧⌘R** drücken.
 2. Der Cursor steht schon im Feld. Tippen.
 3. **Return** — das Ergebnis steht groß da.
 4. Der Text ist jetzt komplett markiert. **Return** würfelt dasselbe nochmal,
@@ -74,18 +74,25 @@ Beide Grenzen sind eingeschlossen. Die Reihenfolge ist egal.
 | `Return` | würfeln — und gleich nochmal für einen neuen Wurf |
 | `↑` / `↓` | durch frühere Eingaben blättern |
 | `esc` | Panel schließen · Anleitung schließen · im Fenster: Feld leeren |
-| `⌥⌘R` | Panel von überall öffnen — nochmal drücken schließt es wieder |
+| `⇧⌘R` | Panel von überall öffnen — nochmal drücken schließt es wieder |
 
 ### Kurzbefehl ändern
 
-In der Anleitung **in der App** (`?` im Panel) steht unter *Einstellungen* das
-Feld **Kurzbefehl**. Draufklicken, die gewünschte Kombination drücken, fertig.
-`esc` bricht ab, `⌫` entfernt den Kurzbefehl ganz — das Menüleisten-Icon
-funktioniert dann weiterhin.
+**Einstellungen** öffnen (`⌘,`, das Zahnrad im Panel oder Rechtsklick aufs
+Menüleisten-Icon), aufs Feld **Kurzbefehl** klicken, die gewünschte Kombination
+drücken, fertig. `esc` bricht ab, `⌫` entfernt den Kurzbefehl ganz — das
+Menüleisten-Icon funktioniert dann weiterhin.
 
 Mindestens ein Modifikator (`⌘` `⌥` `⌃`) muss dabei sein, sonst würde die
 Kombination systemweit normales Tippen abfangen. Hat schon eine andere App die
 Kombination, steht das direkt unter dem Feld.
+
+**⇧⌘R ist bewusst gewählt, aber nicht frei.** Ein globaler Kurzbefehl sticht die
+App, die gerade vorne ist — und ⇧⌘R ist unter anderem belegt bei Finder
+(*AirDrop*), Safari (*Reader einblenden*), Mail (*Allen antworten*) und in
+Browsern (*Hard Reload*). Solange Quick RNG läuft, kommst du dort nicht mehr per
+Tastatur hin. Wenn dich das stört: Kombination ändern. ⌃⌥R war in einer Messung
+über Finder, Safari, Mail, Edge, Xcode und Preview komplett frei.
 
 ## Menüleiste und Fenster
 
@@ -98,8 +105,10 @@ aufs Icon → *Als Fenster öffnen*): dasselbe Tool mit mehr Platz, dazu der
 ins Feld. Solange ein Fenster offen ist, hat die App ein Dock-Icon; danach lebt
 sie wieder nur in der Menüleiste.
 
-**Rechtsklick aufs Icon**: als Fenster öffnen · Anleitung · bei Anmeldung
-starten · beenden.
+**Rechtsklick aufs Icon**: als Fenster öffnen · Anleitung · Einstellungen ·
+beenden.
+
+**Einstellungen** (`⌘,`): Kurzbefehl und „bei Anmeldung starten".
 
 ## Terminal
 
@@ -121,7 +130,7 @@ alias rng='"/Applications/Quick RNG.app/Contents/MacOS/QuickRNG" --roll'
 fehlt ein Trennzeichen (`rot grün blau` statt `rot, grün, blau`) oder eine
 Bereichsgrenze (`3-` statt `3-9`).
 
-**⌥⌘R tut nichts** — dann hat eine andere App die Kombination. Unter
+**⇧⌘R tut nichts** — dann hat eine andere App die Kombination. Unter
 *Einstellungen → Kurzbefehl* in der App steht das dann auch da; einfach eine
 andere Kombination aufnehmen.
 

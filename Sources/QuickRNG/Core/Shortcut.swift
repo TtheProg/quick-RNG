@@ -12,8 +12,13 @@ struct Shortcut: Equatable {
     var modifierFlags: NSEvent.ModifierFlags
     var label: String
 
+    /// ⇧⌘R — easy to grab one-handed and easy to remember. It is not free:
+    /// measured against the running apps' menus it collides with Finder's
+    /// AirDrop, Safari's Reader, Mail's "Allen antworten" and Edge's reload, and
+    /// a global hot key wins over all of them. Deliberate trade-off; anyone it
+    /// bothers changes it in the settings.
     static let `default` = Shortcut(keyCode: UInt16(kVK_ANSI_R),
-                                    modifierFlags: [.option, .command],
+                                    modifierFlags: [.shift, .command],
                                     label: "R")
 
     /// Carbon wants its own modifier bitmask.
