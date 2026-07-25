@@ -83,7 +83,7 @@ struct GuideView: View {
             (hotKeys.shortcut?.display ?? "—",
              hotKeys.shortcut == nil
                 ? "kein Kurzbefehl gesetzt — unten einstellbar"
-                : "Panel von überall öffnen (unten einstellbar)"),
+                : "Panel von überall öffnen — nochmal drücken schließt es"),
         ]
     }
 

@@ -31,6 +31,12 @@ final class PanelController: NSObject, NSWindowDelegate {
         show(relativeTo: button)
     }
 
+    /// The global shortcut toggles, like a second `esc`. No hide-grace period
+    /// here — unlike a status item click, nothing steals key state first.
+    func toggleFromShortcut(relativeTo button: NSStatusBarButton?) {
+        isVisible ? hide() : show(relativeTo: button)
+    }
+
     func show(relativeTo button: NSStatusBarButton?) {
         let panel = panel ?? makePanel()
         position(panel, under: button)

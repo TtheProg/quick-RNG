@@ -74,7 +74,7 @@ Beide Grenzen sind eingeschlossen. Die Reihenfolge ist egal.
 | `Return` | würfeln — und gleich nochmal für einen neuen Wurf |
 | `↑` / `↓` | durch frühere Eingaben blättern |
 | `esc` | Panel schließen · Anleitung schließen · im Fenster: Feld leeren |
-| `⌥⌘R` | Panel von überall öffnen |
+| `⌥⌘R` | Panel von überall öffnen — nochmal drücken schließt es wieder |
 
 ### Kurzbefehl ändern
 

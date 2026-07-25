@@ -16,10 +16,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
         statusItem = item
 
-        // ⌥⌘R by default; changeable in the Anleitung.
+        // ⌥⌘R by default; changeable in the Anleitung. Pressing it again closes
+        // the panel, so the same keystroke gets you in and out.
         MainActor.assumeIsolated {
             HotKeyManager.shared.start { [weak self] in
-                MainActor.assumeIsolated { self?.openPanel() }
+                MainActor.assumeIsolated {
+                    PanelController.shared.toggleFromShortcut(relativeTo: self?.statusItem?.button)
+                }
             }
         }
 
