@@ -37,7 +37,10 @@ Datumsformate: `TT.MM.JJJJ`, `TT.MM.JJ`, `JJJJ-MM-TT`, `TT/MM/JJJJ`.
 | `⌥⌘R` | Panel von überall öffnen |
 
 Rechtsklick aufs Menüleisten-Icon (oder das `···` im Panel): als Fenster öffnen,
-bei Anmeldung starten, beenden.
+Anleitung, bei Anmeldung starten, beenden.
+
+Die ausführliche **[Anleitung](ANLEITUNG.md)** steckt auch in der App — `?` im
+Panel und im Fenster.
 
 Das **Fenster** ist dasselbe Tool mit mehr Platz — plus Verlauf (Eintrag
 anklicken übernimmt die Eingabe wieder) und einem Spickzettel. Solange es offen

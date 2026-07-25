@@ -1,11 +1,11 @@
 import AppKit
 import SwiftUI
 
-/// The app lives in the menu bar (accessory), but flips to a regular app while
-/// the window is open so it gets a Dock icon and a proper menu bar.
+/// The Anleitung gets its own window so it can be opened from the menu bar panel
+/// without the panel having to survive the click.
 @MainActor
-final class WindowController: NSObject, NSWindowDelegate {
-    static let shared = WindowController()
+final class GuideWindowController: NSObject, NSWindowDelegate {
+    static let shared = GuideWindowController()
 
     private var window: NSWindow?
 
@@ -14,32 +14,29 @@ final class WindowController: NSObject, NSWindowDelegate {
         NSApp.setActivationPolicy(.regular)
         NSApp.activate(ignoringOtherApps: true)
         window?.makeKeyAndOrderFront(nil)
-        window?.center()
-        AppState.shared.focusInput()
     }
 
     private func makeWindow() -> NSWindow {
         let window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 440, height: 560),
+            contentRect: NSRect(x: 0, y: 0, width: 560, height: 680),
             styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
             backing: .buffered,
             defer: false
         )
-        window.title = "Quick RNG"
+        window.title = "Quick RNG — Anleitung"
         window.titlebarAppearsTransparent = true
-        window.titleVisibility = .hidden
         window.isMovableByWindowBackground = true
         window.backgroundColor = .windowBackgroundColor
-        window.contentView = NSHostingView(rootView: WindowView())
+        window.contentView = NSHostingView(rootView: GuideView())
         window.delegate = self
         window.isReleasedWhenClosed = false
-        window.setFrameAutosaveName("QuickRNGWindow")
+        window.setFrameAutosaveName("QuickRNGGuide")
+        window.center()
         return window
     }
 
     func windowWillClose(_ notification: Notification) {
-        // Back to a pure menu bar app once the last window is gone — but not
-        // while the Anleitung is still up.
+        // Only drop back to menu-bar-only if no other window is left open.
         let closing = notification.object as? NSWindow
         DispatchQueue.main.async {
             let stillOpen = NSApp.windows.contains {

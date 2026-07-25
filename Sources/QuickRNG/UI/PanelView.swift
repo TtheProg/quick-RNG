@@ -86,6 +86,17 @@ struct PanelView: View {
             hint("↑↓", "verlauf")
             Spacer(minLength: 4)
             Button {
+                GuideWindowController.shared.show()
+                PanelController.shared.hide()
+            } label: {
+                Image(systemName: "questionmark.circle")
+                    .font(.system(size: 13, weight: .semibold))
+            }
+            .buttonStyle(.plain)
+            .foregroundStyle(Theme.inkFaint)
+            .help("Anleitung")
+
+            Button {
                 WindowController.shared.show()
                 PanelController.shared.hide()
             } label: {
@@ -98,6 +109,7 @@ struct PanelView: View {
 
             Menu {
                 Button("Als Fenster öffnen") { WindowController.shared.show(); PanelController.shared.hide() }
+                Button("Anleitung") { GuideWindowController.shared.show(); PanelController.shared.hide() }
                 Toggle("Bei Anmeldung starten", isOn: Binding(
                     get: { LoginItem.isEnabled },
                     set: { _ in LoginItem.toggle() }

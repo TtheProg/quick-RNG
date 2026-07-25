@@ -19,6 +19,13 @@ struct WindowView: View {
                         .foregroundStyle(Theme.inkFaint)
                     Spacer()
                     KindChip(request: state.preview)
+                    Button { GuideWindowController.shared.show() } label: {
+                        Image(systemName: "questionmark.circle")
+                            .font(.system(size: 14, weight: .semibold))
+                    }
+                    .buttonStyle(.plain)
+                    .foregroundStyle(Theme.inkFaint)
+                    .help("Anleitung")
                 }
                 .padding(.top, 24)
 
@@ -79,16 +86,27 @@ struct WindowView: View {
                     )
             )
 
-            Button { withAnimation(.easeOut(duration: 0.2)) { showSyntax.toggle() } } label: {
-                HStack(spacing: 4) {
-                    Image(systemName: showSyntax ? "chevron.down" : "chevron.right")
-                        .font(.system(size: 8, weight: .bold))
-                    Text("was kann ich eingeben?")
-                        .font(.system(size: 12, weight: .medium, design: .rounded))
+            HStack(spacing: 8) {
+                Button { withAnimation(.easeOut(duration: 0.2)) { showSyntax.toggle() } } label: {
+                    HStack(spacing: 4) {
+                        Image(systemName: showSyntax ? "chevron.down" : "chevron.right")
+                            .font(.system(size: 8, weight: .bold))
+                        Text("was kann ich eingeben?")
+                            .font(.system(size: 12, weight: .medium, design: .rounded))
+                    }
+                    .foregroundStyle(Theme.inkFaint)
                 }
-                .foregroundStyle(Theme.inkFaint)
+                .buttonStyle(.plain)
+
+                Text("·").foregroundStyle(Theme.inkFaint)
+
+                Button { GuideWindowController.shared.show() } label: {
+                    Text("ganze Anleitung")
+                        .font(.system(size: 12, weight: .medium, design: .rounded))
+                        .foregroundStyle(Theme.inkFaint)
+                }
+                .buttonStyle(.plain)
             }
-            .buttonStyle(.plain)
 
             if showSyntax { syntaxSheet }
         }

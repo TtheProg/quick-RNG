@@ -39,10 +39,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             NSApp.appearance = NSAppearance(named: CommandLine.arguments[i + 1] == "light" ? .aqua : .darkAqua)
         }
 
-        // `--open` / `--window` let you launch straight into either surface.
+        // `--window` / `--guide` / `--open` launch straight into one surface.
         let args = CommandLine.arguments
         if args.contains("--window") {
             WindowController.shared.show()
+        } else if args.contains("--guide") {
+            GuideWindowController.shared.show()
         } else if args.contains("--open") {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
                 MainActor.assumeIsolated { self?.openPanel() }
@@ -70,6 +72,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let menu = NSMenu()
         menu.addItem(withTitle: "Als Fenster öffnen", action: #selector(openWindow), keyEquivalent: "o")
             .target = self
+        menu.addItem(withTitle: "Anleitung", action: #selector(openGuide), keyEquivalent: "?")
+            .target = self
         let login = menu.addItem(withTitle: "Bei Anmeldung starten",
                                  action: #selector(toggleLoginItem), keyEquivalent: "")
         login.target = self
@@ -81,6 +85,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem?.menu = menu
         statusItem?.button?.performClick(nil)
         statusItem?.menu = nil
+    }
+
+    @MainActor
+    @objc private func openGuide() {
+        GuideWindowController.shared.show()
     }
 
     @MainActor
