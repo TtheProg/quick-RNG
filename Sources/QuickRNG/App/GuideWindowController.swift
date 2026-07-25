@@ -24,7 +24,7 @@ final class GuideWindowController: NSObject, NSWindowDelegate {
 
     private func makeWindow() -> NSWindow {
         let window = EscapeClosingWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 560, height: 680),
+            contentRect: NSRect(x: 0, y: 0, width: 640, height: 470),
             styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
             backing: .buffered,
             defer: false
@@ -37,6 +37,7 @@ final class GuideWindowController: NSObject, NSWindowDelegate {
         window.delegate = self
         window.isReleasedWhenClosed = false
         window.setFrameAutosaveName("QuickRNGGuide")
+        window.setContentSizeClamped(NSSize(width: 640, height: 470))
         window.center()
         return window
     }
